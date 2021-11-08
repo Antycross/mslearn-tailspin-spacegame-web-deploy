@@ -7,11 +7,11 @@ variables:
 
 schedules:
 - cron: '0 3 * * *'
-  displayName: 'Deploy every day  at 3 A.M.'
+  displayName: 'Deploy every day at 3 A.M.'
   branches:
     include:
     - release
-  always: false
+  always: false 
 
 stages:
 - stage: 'Build'
@@ -110,7 +110,7 @@ stages:
   jobs:
   - deployment: Deploy
     pool:
-      vmImgae: 'ubuntu-20.04'
+      vmImage: 'ubuntu-20.04'
     environment: test
     variables:
     - group: 'Release'
@@ -123,7 +123,6 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubsciption: 'Resource Manager - Tailspin - Space Game'
+              azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-
